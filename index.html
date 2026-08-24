@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Aplicação individual para o trabalho de Seheilen." />
+    <meta name="theme-color" content="#f2eee7" />
+    <title>Aplicação — Seheilen</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="site-header">
+        <a class="wordmark" href="https://seheilen.com/" aria-label="Seheilen — página inicial">seheilen</a>
+        <span class="header-note">aplicação individual</span>
+      </header>
+
+      <div class="layout">
+        <aside class="intro-panel">
+          <p class="eyebrow">Um primeiro passo</p>
+          <h1>Antes de qualquer resposta, quero entender o que está acontecendo com você.</h1>
+          <p class="intro-copy">Não existe resposta certa aqui. Existe o seu momento, contado com a clareza possível hoje.</p>
+          <div class="quiet-note">
+            <span>01</span>
+            <p>Leva menos de cinco minutos. Eu leio cada aplicação pessoalmente.</p>
+          </div>
+        </aside>
+
+        <section class="form-card" aria-live="polite">
+          <div id="form-content">
+            <div class="progress-copy">
+              <span id="step-name">Seu momento</span>
+              <span><strong id="step-number">1</strong> de 3</span>
+            </div>
+            <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+
+            <!-- Preencha data-endpoint somente depois de configurar o banco de dados. -->
+            <form id="application-form" data-endpoint="" novalidate>
+              <div class="honeypot" aria-hidden="true">
+                <label>Não preencha este campo <input name="website" tabindex="-1" autocomplete="off" /></label>
+              </div>
+
+              <fieldset class="step-fieldset active" data-step="0">
+                <legend><small>Vamos começar por aqui</small>O que trouxe você até mim?</legend>
+                <label>
+                  <span>Como você gostaria de ser chamada?</span>
+                  <input type="text" name="name" autocomplete="name" placeholder="Seu nome" required />
+                </label>
+                <label>
+                  <span>O que está acontecendo na sua vida hoje que você gostaria de mudar?</span>
+                  <textarea name="story" placeholder="Conte do seu jeito. Não precisa organizar tudo antes de escrever." rows="5" required></textarea>
+                </label>
+              </fieldset>
+
+              <fieldset class="step-fieldset" data-step="1" hidden>
+                <legend><small>Um pouco do caminho</small>O que você já percebeu?</legend>
+                <div class="field-group">
+                  <span>O que você já tentou para mudar essa situação?</span>
+                  <div class="choice-grid">
+                    <label class="choice"><input type="checkbox" name="tried" value="Terapia" /><span>Terapia</span></label>
+                    <label class="choice"><input type="checkbox" name="tried" value="Coaching ou mentoria" /><span>Coaching ou mentoria</span></label>
+                    <label class="choice"><input type="checkbox" name="tried" value="Cursos e estudos" /><span>Cursos e estudos</span></label>
+                    <label class="choice"><input type="checkbox" name="tried" value="Práticas corporais" /><span>Práticas corporais</span></label>
+                    <label class="choice"><input type="checkbox" name="tried" value="Tentei resolver sozinha" /><span>Tentei resolver sozinha</span></label>
+                    <label class="choice"><input type="checkbox" name="tried" value="Outro caminho" /><span>Outro caminho</span></label>
+                  </div>
+                </div>
+                <label>
+                  <span>O que você entende racionalmente, mas ainda não consegue sustentar na prática?</span>
+                  <textarea name="gap" placeholder="Por exemplo: sei que preciso colocar um limite, mas..." rows="4" required></textarea>
+                </label>
+                <label>
+                  <span>Por que trabalhar essa questão se tornou importante agora?</span>
+                  <textarea name="whyNow" placeholder="O que mudou ou deixou de poder esperar?" rows="3" required></textarea>
+                </label>
+              </fieldset>
+
+              <fieldset class="step-fieldset" data-step="2" hidden>
+                <legend><small>Para seguirmos</small>Como posso falar com você?</legend>
+                <div class="two-columns">
+                  <label>
+                    <span>E-mail</span>
+                    <input type="email" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                  </label>
+                  <label>
+                    <span>WhatsApp com DDD</span>
+                    <input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" required />
+                  </label>
+                </div>
+                <div class="field-group">
+                  <span>Você está disponível para um processo individual de 6 a 12 semanas?</span>
+                  <div class="choice-grid single">
+                    <label class="choice"><input type="radio" name="availability" value="Sim" required /><span>Sim</span></label>
+                    <label class="choice"><input type="radio" name="availability" value="Quero entender melhor antes" /><span>Quero entender melhor antes</span></label>
+                    <label class="choice"><input type="radio" name="availability" value="Não neste momento" /><span>Não neste momento</span></label>
+                  </div>
+                </div>
+                <div class="field-group">
+                  <span>A primeira sessão custa R$ 200. Se houver alinhamento, você está disponível para esse investimento?</span>
+                  <div class="choice-grid single">
+                    <label class="choice"><input type="radio" name="investment" value="Sim" required /><span>Sim</span></label>
+                    <label class="choice"><input type="radio" name="investment" value="Preciso de mais informações" /><span>Preciso de mais informações</span></label>
+                    <label class="choice"><input type="radio" name="investment" value="Não neste momento" /><span>Não neste momento</span></label>
+                  </div>
+                </div>
+                <label class="consent">
+                  <input type="checkbox" name="consent" required />
+                  <span>Autorizo o contato pelo WhatsApp e o uso dos meus dados para esta aplicação.</span>
+                </label>
+              </fieldset>
+
+              <p id="error-message" class="error-message" role="alert" hidden></p>
+              <div class="button-row">
+                <button id="back-button" type="button" class="back-button" hidden>Voltar</button>
+                <button id="next-button" type="button" class="primary-button">Continuar <span aria-hidden="true">→</span></button>
+                <button id="submit-button" type="submit" class="primary-button" hidden>Enviar aplicação <span aria-hidden="true">→</span></button>
+              </div>
+            </form>
+            <p class="privacy-line">Suas respostas são confidenciais.</p>
+          </div>
+
+          <div id="success-state" class="success-state" hidden>
+            <span class="success-mark">✓</span>
+            <p class="step-kicker">Aplicação recebida</p>
+            <h2 id="success-title">Obrigada.</h2>
+            <p>Vou ler suas respostas com atenção. Se houver alinhamento, entrarei em contato pelo WhatsApp em até 48 horas.</p>
+            <a href="https://seheilen.com/">Voltar para o site <span aria-hidden="true">→</span></a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
