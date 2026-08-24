@@ -61,7 +61,10 @@
       availability: String(data.get("availability") || ""),
       investment: String(data.get("investment") || ""),
       consent: data.get("consent") === "on",
-      submittedAt: new Date().toISOString(),
+      turnstileToken: String(
+  data.get("cf-turnstile-response") || ""
+),
+submittedAt: new Date().toISOString(),
       source: "aplicacao.seheilen.com"
     };
   }
@@ -85,6 +88,13 @@
       return;
     }
 
+const payload = buildPayload();
+
+if (!payload.turnstileToken) {
+  showError("Confirme a verificação de segurança antes de enviar.");
+  return;
+}
+    
     submitButton.disabled = true;
     submitButton.firstChild.textContent = "Enviando... ";
 
@@ -92,8 +102,7 @@
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(buildPayload())
-      });
+        body: JSON.stringify(payload)      });
 
       if (!response.ok) throw new Error("Falha no envio");
 
@@ -106,6 +115,9 @@
       showError("Não consegui enviar sua aplicação. Aguarde um instante e tente novamente.");
       submitButton.disabled = false;
       submitButton.firstChild.textContent = "Enviar aplicação ";
+      if (window.turnstile) {
+  window.turnstile.reset();
+}
     }
   });
 
