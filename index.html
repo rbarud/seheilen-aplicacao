@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#f2eee7" />
     <title>Aplicação — Seheilen</title>
     <link rel="stylesheet" href="./styles.css" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </head>
   <body>
     <main class="page-shell">
@@ -107,6 +108,13 @@
                   <input type="checkbox" name="consent" required />
                   <span>Autorizo o contato pelo WhatsApp e o uso dos meus dados para esta aplicação.</span>
                 </label>
+                <div
+  class="cf-turnstile"
+  data-sitekey="0x4AAAAAAEafrQJoZJ27xFeJ"
+  data-theme="light"
+  data-size="flexible"
+  data-action="application_form"
+></div>
               </fieldset>
 
               <p id="error-message" class="error-message" role="alert" hidden></p>
